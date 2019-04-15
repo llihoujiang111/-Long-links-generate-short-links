@@ -37,4 +37,13 @@ def generateurl(request):
         return render(request, 'index.html')
 
 
-
+# 使用短连接进行跳转
+def useurl(request):
+    if request.method == 'GET':
+        a=request.getRequestURL()
+        obje = Shorturl.objects.filter(durl=a)
+        if obje:
+            curl = obje.get('curl')
+            num = obje.get('number')
+            obje.update(number=(int(num) + 1))  # 访问一次计数器加一
+            return HttpResponseRedirect(curl)  # 302 跳转
