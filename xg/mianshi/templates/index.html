@@ -5,11 +5,30 @@
     <title>Title</title>
 </head>
 <body>
-<form action="" method="post">
+<form id="forma" action="" method="post">
     {% csrf_token %}
     输入连接: <input type="text" name="curl">
-     <p>自定义短连接: <input type="text" name="zdurl"></p>
-    <input type="submit" name="tj">
+    <p>自定义短连接: <input type="text" name="zdurl"></p>
+    <input id='tj' type="submit" name="tj">
+    <script>
+
+        $(function () {
+            $("#tj").on("click", function () {
+                var data = $('#forma').serialize();
+                $.ajax({
+                    type: "PSOT",
+                    url: "{% url '网址:使用' %}",
+                    data: data,
+                    dataType: "json",
+                    success: function (data) {
+                        console.debug(data);
+                    }
+                })
+            })
+        })
+
+    </script>
+
 </form>
 </body>
 </html>
