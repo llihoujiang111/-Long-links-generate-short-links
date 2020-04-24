@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="forma" action="" method="post">
+    {% csrf_token %}
+    <p>输入短连接: <input type="text" name="zdurl"></p>
+    <input id='tj' type="submit" name="tj">
+
+ <script>
+
+        $(function () {
+            $("#tj").on("click", function () {
+                var data = $('#forma').serialize();
+                $.ajax({
+                    type: "PSOT",
+                    url: "{% url '网址:使用' %}",
+                    data: data,
+                    dataType: "json",
+                    success: function (data) {
+                        console.debug(data);
+                    }
+                })
+            })
+        })
+
+    </script>
+</body>
+</html>
